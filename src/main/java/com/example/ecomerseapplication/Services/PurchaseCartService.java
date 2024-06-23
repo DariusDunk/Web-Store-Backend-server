@@ -23,8 +23,4 @@ public class PurchaseCartService {
 
     }
 
-    public List<Product> productsOfPurchaseCart(Purchase purchase) {
-        return purchaseCartRepository.productsOfCustomer(purchase);
-    }
-
 }

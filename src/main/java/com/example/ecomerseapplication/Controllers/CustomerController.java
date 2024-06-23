@@ -2,7 +2,9 @@ package com.example.ecomerseapplication.Controllers;
 
 import com.example.ecomerseapplication.DTOs.*;
 import com.example.ecomerseapplication.Entities.Customer;
+import com.example.ecomerseapplication.Entities.CustomerCart;
 import com.example.ecomerseapplication.Entities.Product;
+import com.example.ecomerseapplication.EntityToDTOConverters.CustomerCartResponseBuilder;
 import com.example.ecomerseapplication.EntityToDTOConverters.ProductDTOMapper;
 import com.example.ecomerseapplication.Others.PageContentLimit;
 import com.example.ecomerseapplication.Services.CustomerCartService;
@@ -16,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -104,18 +107,21 @@ public class CustomerController {
     }
 
     @GetMapping("cart")
-    public ResponseEntity<List<CompactProductResponse>> showCart(@RequestParam long id) {
+    public ResponseEntity<CustomerCartResponse> showCart(@RequestParam long id) {//TODO sloji broika i ob6ta cena v otdelen dto class
         Customer customer = customerService.findById(id);
 
         if (customer == null)
             return ResponseEntity.notFound().build();
 
-        List<Product> products = customerCartService.productsOfCustomerCart(customer);
+        List<CustomerCart> customerCarts = customerCartService.cartsByCustomer(customer);
 
-        List<CompactProductResponse> compactProductResponses = products
-                .stream()
-                .map(ProductDTOMapper::entityToCompactResponse)
-                .toList();
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(compactProductResponses);
+        if (customerCarts.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(CustomerCartResponseBuilder.build(customerCarts));
+
     }
 }
