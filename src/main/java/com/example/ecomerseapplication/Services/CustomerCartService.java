@@ -59,9 +59,8 @@ public class CustomerCartService {
     }
 
     @Transactional
-    public ResponseEntity<String> clearCart(Customer customer) {
+    public void clearCart(Customer customer) {
          customerCartRepository.deleteAllByCustomer(customer);
-        return ResponseEntity.status(HttpStatus.OK).body("Cart cleared successfully!");
     }
 
 }
