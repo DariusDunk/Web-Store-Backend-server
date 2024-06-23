@@ -58,4 +58,10 @@ public class CustomerCartService {
         return customerCartRepository.findByCustomer(customer);
     }
 
+    @Transactional
+    public ResponseEntity<String> clearCart(Customer customer) {
+         customerCartRepository.deleteAllByCustomer(customer);
+        return ResponseEntity.status(HttpStatus.OK).body("Cart cleared successfully!");
+    }
+
 }

@@ -121,6 +121,8 @@ public class PurchaseController {
 
         purchaseResponse.products = productResponses;
 
+        customerCartService.clearCart(customer);
+
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(purchaseResponse);
 
     }
