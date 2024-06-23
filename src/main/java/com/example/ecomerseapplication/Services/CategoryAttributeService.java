@@ -1,0 +1,33 @@
+package com.example.ecomerseapplication.Services;
+
+import com.example.ecomerseapplication.Entities.CategoryAttribute;
+import com.example.ecomerseapplication.Entities.ProductCategory;
+import com.example.ecomerseapplication.Repositories.CategoryAttributeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
+
+@Service
+public class CategoryAttributeService {
+
+    @Autowired
+    CategoryAttributeRepository categoryAttributeRepository;
+
+    public List<CategoryAttribute> getAll() {
+        return categoryAttributeRepository.findAll();
+    }
+
+    public List<CategoryAttribute> getByCategory(ProductCategory productCategory) {
+        return categoryAttributeRepository.findByProductCategory(productCategory);
+    }
+
+    public Set<CategoryAttribute> getByNameAndOption(Set<Integer> nameIds, Set<String> options) {
+        return categoryAttributeRepository.findByNameIdAndOption(nameIds, options);
+    }
+
+    public List<CategoryAttribute> getByIds(List<Integer> idList) {
+        return categoryAttributeRepository.findAllById(idList);
+    }
+}

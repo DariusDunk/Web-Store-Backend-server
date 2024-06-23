@@ -1,0 +1,59 @@
+package com.example.ecomerseapplication.Controllers;
+
+import com.example.ecomerseapplication.DTOs.CategoryFiltersResponse;
+import com.example.ecomerseapplication.Entities.AttributeName;
+import com.example.ecomerseapplication.Entities.ProductCategory;
+import com.example.ecomerseapplication.EntityToDTOConverters.AttributeNameToDTO;
+import com.example.ecomerseapplication.EntityToDTOConverters.ManufacturerConverter;
+import com.example.ecomerseapplication.Services.AttributeNameService;
+import com.example.ecomerseapplication.Services.CategoryAttributeService;
+import com.example.ecomerseapplication.Services.ManufacturerService;
+import com.example.ecomerseapplication.Services.ProductCategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+@RestController
+@RequestMapping("category/")
+public class CategoryController {
+
+    @Autowired
+    ProductCategoryService categoryService;
+
+    @Autowired
+    CategoryAttributeService categoryAttributeService;
+
+    @Autowired
+    AttributeNameService attributeNameService;
+
+    @Autowired
+    ManufacturerService manufacturerService;
+
+    @GetMapping("")
+    public List<ProductCategory> getAll() {
+        return categoryService.findAll();
+    }
+
+    @GetMapping("filters")
+    public CategoryFiltersResponse getAttributes(@RequestParam int id) {
+        Optional<ProductCategory> category = categoryService.findById(id);
+        Set<AttributeName> attributeNameSet = attributeNameService.getNameSetByCategory(category.orElse(null));
+
+        CategoryFiltersResponse categoryFiltersResponse = new CategoryFiltersResponse();
+        categoryFiltersResponse.manufacturerDTOSet = ManufacturerConverter.objectArrSetToDtoSet(
+                manufacturerService.
+                        getByCategory(category.orElse(null))
+        );
+        categoryFiltersResponse.categoryAttributesResponses = AttributeNameToDTO.nameSetToResponseSet(attributeNameSet);
+
+        return categoryFiltersResponse;
+
+
+    }
+}
