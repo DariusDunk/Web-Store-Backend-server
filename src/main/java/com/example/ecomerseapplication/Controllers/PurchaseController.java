@@ -79,7 +79,7 @@ public class PurchaseController {
             totalCost+=customerCart
                     .getCustomerCartId()
                     .getProduct()
-                    .getSalePriceStotinki();
+                    .getSalePriceStotinki()*customerCart.getQuantity();
         }
 
         purchase.setTotalCost(totalCost);
@@ -98,28 +98,40 @@ public class PurchaseController {
                     .getCustomerCartId()
                     .getProduct());
 
-            System.out.println(customerCart.getCustomerCartId().getProduct().getProductName());
-
             purchaseCarts.add(new PurchaseCart(purchaseCartId,
                     customerCart.getQuantity()));
         }
 
         purchaseCartService.saveCarts(purchaseCarts);
 
-        List<Product> products = new ArrayList<>();
+//        List<Product> products = new ArrayList<>();
 
-        for (CustomerCart customerCart:customerCarts) {
-            products.add(customerCart.getCustomerCartId().getProduct());
-        }
-
-        List<CompactProductResponse> productResponses = products.
-                stream()
-                .map(ProductDTOMapper::entityToCompactResponse)
-                .toList();
+//        List<CompactProductQuantityPair> compactProductQuantityPairs = new ArrayList<>();
 
         PurchaseResponse purchaseResponse = PurchaseMapper.entityToResponse(purchase);
 
-        purchaseResponse.products = productResponses;
+        for (CustomerCart customerCart:customerCarts) {
+
+            CompactProductResponse compactProduct = ProductDTOMapper
+                    .entityToCompactResponse(customerCart.getCustomerCartId().getProduct());
+
+            CompactProductQuantityPair pair = new CompactProductQuantityPair();
+            pair.compactProductResponse = compactProduct;
+            pair.quantity = customerCart.getQuantity();
+
+            purchaseResponse.productQuantityPairs.add(pair);
+        }
+
+//        List<CompactProductResponse> productResponses = products.
+//                stream()
+//                .map(ProductDTOMapper::entityToCompactResponse)
+//                .toList();
+
+
+
+
+
+
 
         customerCartService.clearCart(customer);
 
