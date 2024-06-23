@@ -13,12 +13,6 @@ import java.util.List;
 @Repository
 public interface PurchaseCartRepository extends JpaRepository<PurchaseCart, PurchaseCartId> {
 
-    @Query(value = "select pc.purchaseCartId.product " +
-            "from PurchaseCart pc " +
-            "where pc.purchaseCartId.purchase = ?1")
-    List<Product> productsOfCustomer(Purchase purchase);
-
-
     @Query(value = "select pc " +
             "from PurchaseCart pc " +
             "where pc.purchaseCartId.purchase=?1")

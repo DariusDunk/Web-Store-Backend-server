@@ -32,9 +32,6 @@ public class CustomerController {
     private CustomerCartService customerCartService;
 
     @Autowired
-    private SavedPurchaseDetailsService purchaseDetailsService;
-
-    @Autowired
     private PurchaseService purchaseService;
 
     @Autowired
