@@ -1,5 +1,6 @@
 package com.example.ecomerseapplication.Services;
 
+import com.example.ecomerseapplication.Entities.Purchase;
 import com.example.ecomerseapplication.Entities.PurchaseCart;
 import com.example.ecomerseapplication.Repositories.PurchaseCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +22,8 @@ public class PurchaseCartService {
 
     }
 
+    public List<PurchaseCart> getByPurchase(Purchase purchase) {
+
+        return purchaseCartRepository.getByPurchase(purchase);
+    }
 }

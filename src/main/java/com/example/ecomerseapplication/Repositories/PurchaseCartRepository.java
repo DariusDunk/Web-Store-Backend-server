@@ -19,4 +19,8 @@ public interface PurchaseCartRepository extends JpaRepository<PurchaseCart, Purc
     List<Product> productsOfCustomer(Purchase purchase);
 
 
+    @Query(value = "select pc " +
+            "from PurchaseCart pc " +
+            "where pc.purchaseCartId.purchase=?1")
+    List<PurchaseCart> getByPurchase(Purchase purchase);
 }

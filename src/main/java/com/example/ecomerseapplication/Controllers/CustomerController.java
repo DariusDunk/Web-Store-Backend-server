@@ -1,22 +1,20 @@
 package com.example.ecomerseapplication.Controllers;
 
 import com.example.ecomerseapplication.DTOs.*;
-import com.example.ecomerseapplication.Entities.Customer;
-import com.example.ecomerseapplication.Entities.CustomerCart;
-import com.example.ecomerseapplication.Entities.Product;
+import com.example.ecomerseapplication.Entities.*;
+import com.example.ecomerseapplication.EntityToDTOConverters.CompactPurchaseResponseBuilder;
 import com.example.ecomerseapplication.EntityToDTOConverters.CustomerCartResponseBuilder;
 import com.example.ecomerseapplication.EntityToDTOConverters.ProductDTOMapper;
 import com.example.ecomerseapplication.Others.PageContentLimit;
-import com.example.ecomerseapplication.Services.CustomerCartService;
-import com.example.ecomerseapplication.Services.CustomerService;
-import com.example.ecomerseapplication.Services.ProductService;
-import com.example.ecomerseapplication.Services.SavedPurchaseDetailsService;
+import com.example.ecomerseapplication.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,16 +23,22 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    CustomerService customerService;
+    private CustomerService customerService;
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
     @Autowired
-    CustomerCartService customerCartService;
+    private CustomerCartService customerCartService;
 
     @Autowired
-    SavedPurchaseDetailsService purchaseDetailsService;
+    private SavedPurchaseDetailsService purchaseDetailsService;
+
+    @Autowired
+    private PurchaseService purchaseService;
+
+    @Autowired
+    private PurchaseCartService purchaseCartService;
 
     @PostMapping("registration")
     public ResponseEntity<String> register(@RequestBody CustomerAccountRequest customerAccountRequest) {
@@ -120,6 +124,43 @@ public class CustomerController {
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(CustomerCartResponseBuilder.build(customerCarts));
-
     }
+
+    @GetMapping("purchase_history")                     //TODO do
+    public ResponseEntity<List<CompactPurchaseResponse>> showPurchases(@RequestParam long id) {
+
+        Customer customer = customerService.findById(id);
+
+        if (customer == null)
+            return ResponseEntity.notFound().build();
+
+        List<Purchase> purchases = purchaseService.getByCustomer(customer);
+
+        List<CompactPurchaseResponse> responses = new ArrayList<>();
+
+        for (Purchase purchase : purchases) {
+            List<PurchaseCart> purchaseCarts = purchaseCartService.getByPurchase(purchase);
+
+            if (purchaseCarts.isEmpty())
+                continue;
+
+            List<CompactProductQuantityPair> pairs = new ArrayList<>();
+
+            for (PurchaseCart cart : purchaseCarts) {
+                CompactProductQuantityPair pair = new CompactProductQuantityPair();
+                pair.compactProductResponse = ProductDTOMapper
+                        .entityToCompactResponse(cart.getPurchaseCartId().getProduct());
+                pair.quantity = cart.getQuantity();
+
+                pairs.add(pair);
+            }
+
+            CompactPurchaseResponse compactPurchaseResponse = CompactPurchaseResponseBuilder.build(purchase, pairs);
+
+            responses.add(compactPurchaseResponse);
+        }
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(responses);
+    }
+
+
 }
