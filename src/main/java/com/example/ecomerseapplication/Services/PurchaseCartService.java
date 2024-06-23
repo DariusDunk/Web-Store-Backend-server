@@ -1,7 +1,5 @@
 package com.example.ecomerseapplication.Services;
 
-import com.example.ecomerseapplication.Entities.Product;
-import com.example.ecomerseapplication.Entities.Purchase;
 import com.example.ecomerseapplication.Entities.PurchaseCart;
 import com.example.ecomerseapplication.Repositories.PurchaseCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
