@@ -1,5 +1,6 @@
 package com.example.ecomerseapplication;
 import com.example.ecomerseapplication.Entities.CategoryAttribute;
+import com.example.ecomerseapplication.Entities.Customer;
 import com.example.ecomerseapplication.Entities.CustomerCart;
 import com.example.ecomerseapplication.Entities.ProductCategory;
 import com.example.ecomerseapplication.Others.PurchaseCodeGenerator;
@@ -9,7 +10,6 @@ import com.example.ecomerseapplication.Services.CustomerService;
 import com.example.ecomerseapplication.Services.ProductCategoryService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -36,9 +36,6 @@ class EComerseApplicationTests {
 
     @Autowired
     CustomerService customerService;
-
-    @Value("jasypt.encryptor.password")
-    String key;
 
     @Test
     void attributeTest() {
@@ -76,5 +73,17 @@ class EComerseApplicationTests {
             System.out.println("Error");
         else
             System.out.println("Finished");
+    }
+
+    @Test
+    void passwordCheck() {
+        Customer customer = customerService.getByEmail("konstantin_aleksandrov@abv.bg");
+
+        String password = "fitnesmaniak200klek";
+
+        String hashedPw = String.valueOf(customer.getPassword());
+        System.out.println(hashedPw);
+
+        System.out.println(BCrypt.checkpw(password,hashedPw));
     }
 }

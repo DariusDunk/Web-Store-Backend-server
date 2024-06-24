@@ -7,15 +7,19 @@ import com.example.ecomerseapplication.EntityToDTOConverters.CustomerCartRespons
 import com.example.ecomerseapplication.EntityToDTOConverters.ProductDTOMapper;
 import com.example.ecomerseapplication.Others.PageContentLimit;
 import com.example.ecomerseapplication.Services.*;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -44,7 +48,7 @@ public class CustomerController {
     }
 
     @PostMapping("login")
-    public ResponseEntity<Integer> logIn(@RequestBody CustomerAccountRequest customerAccountRequest) {
+    public ResponseEntity<Long> logIn(@RequestBody CustomerAccountRequest customerAccountRequest) {
         return customerService.logIn(customerAccountRequest);
     }
 
@@ -106,7 +110,7 @@ public class CustomerController {
     }
 
     @GetMapping("cart")
-    public ResponseEntity<CustomerCartResponse> showCart(@RequestParam long id) {//TODO sloji broika i ob6ta cena v otdelen dto class
+    public ResponseEntity<CustomerCartResponse> showCart(@RequestParam long id) {
         Customer customer = customerService.findById(id);
 
         if (customer == null)
@@ -123,7 +127,7 @@ public class CustomerController {
                 .body(CustomerCartResponseBuilder.build(customerCarts));
     }
 
-    @GetMapping("purchase_history")                     //TODO do
+    @GetMapping("purchase_history")
     public ResponseEntity<List<CompactPurchaseResponse>> showPurchases(@RequestParam long id) {
 
         Customer customer = customerService.findById(id);
@@ -159,5 +163,13 @@ public class CustomerController {
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(responses);
     }
 
+    @PostMapping("change-passowrd")
+    public ResponseEntity<String> resetPassword(@RequestBody CustomerAccountRequest request) {
+        Customer customer = customerService.getByEmail(request.email);
 
+        if (customer==null)
+            return ResponseEntity.notFound().build();
+
+        return customerService.passwordUpdate(customer,request.password);
+    }
 }
