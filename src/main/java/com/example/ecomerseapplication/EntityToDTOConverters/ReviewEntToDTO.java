@@ -18,8 +18,5 @@ public class ReviewEntToDTO {
         reviewResponse.customerDetailsForReview = customerDetailsForReview;
 
         return reviewResponse;
-
     }
-
-
 }

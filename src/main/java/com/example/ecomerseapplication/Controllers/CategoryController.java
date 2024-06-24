@@ -6,7 +6,6 @@ import com.example.ecomerseapplication.Entities.ProductCategory;
 import com.example.ecomerseapplication.EntityToDTOConverters.AttributeNameToDTO;
 import com.example.ecomerseapplication.EntityToDTOConverters.ManufacturerConverter;
 import com.example.ecomerseapplication.Services.AttributeNameService;
-import com.example.ecomerseapplication.Services.CategoryAttributeService;
 import com.example.ecomerseapplication.Services.ManufacturerService;
 import com.example.ecomerseapplication.Services.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +24,6 @@ public class CategoryController {
 
     @Autowired
     ProductCategoryService categoryService;
-
-    @Autowired
-    CategoryAttributeService categoryAttributeService;
 
     @Autowired
     AttributeNameService attributeNameService;

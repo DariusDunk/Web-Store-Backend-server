@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -24,7 +23,6 @@ public interface CustomerCartRepository extends JpaRepository<CustomerCart, Cust
                         @Param("productId") int productId);
 
     boolean existsByCustomerCartId(CustomerCartId customerCartId);
-
 
     @Query(value = "select cc.customerCartId.product " +
             "from CustomerCart cc " +

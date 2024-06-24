@@ -3,7 +3,6 @@ package com.example.ecomerseapplication.EntityToDTOConverters;
 import com.example.ecomerseapplication.DTOs.CategoryAttributesResponse;
 import com.example.ecomerseapplication.Entities.AttributeName;
 import com.example.ecomerseapplication.Entities.CategoryAttribute;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,8 +22,6 @@ public class AttributeNameToDTO {
                 categoryAttributesResponse.options.add(attribute.getAttributeOption());
             responseSet.add(categoryAttributesResponse);
         }
-
-
         return responseSet;
     }
 }

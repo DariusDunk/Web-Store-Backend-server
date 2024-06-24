@@ -7,12 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import java.util.Optional;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
-
-
     boolean existsByProductAndCustomer(Product product, Customer customer);
 
     Optional<Review> getByProductAndCustomer(Product product, Customer customer);

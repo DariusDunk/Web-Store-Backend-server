@@ -4,7 +4,6 @@ import com.example.ecomerseapplication.DTOs.CompactProductQuantityPair;
 import com.example.ecomerseapplication.DTOs.CustomerCartResponse;
 import com.example.ecomerseapplication.Entities.CustomerCart;
 import com.example.ecomerseapplication.Entities.Product;
-
 import java.util.List;
 
 public class CustomerCartResponseBuilder {

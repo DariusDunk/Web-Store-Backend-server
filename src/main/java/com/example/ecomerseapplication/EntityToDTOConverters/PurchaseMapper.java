@@ -16,7 +16,6 @@ public class PurchaseMapper {
 
         return purchase;
     }
-
     public static PurchaseResponse entityToResponse(Purchase purchase) {
         PurchaseResponse purchaseResponse = new PurchaseResponse();
         purchaseResponse.purchaseCode = purchase.getPurchaseCode();

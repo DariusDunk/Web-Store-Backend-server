@@ -3,7 +3,6 @@ package com.example.ecomerseapplication.EntityToDTOConverters;
 import com.example.ecomerseapplication.DTOs.CompactProductQuantityPair;
 import com.example.ecomerseapplication.DTOs.CompactPurchaseResponse;
 import com.example.ecomerseapplication.Entities.Purchase;
-
 import java.util.List;
 
 public class CompactPurchaseResponseBuilder {

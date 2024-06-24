@@ -41,8 +41,6 @@ public class ReviewService {
             return updateReview(existingReview, request, product);
         }
         return createReview(product, customer, request);
-
-
     }
 
     @Transactional
@@ -89,16 +87,12 @@ public class ReviewService {
             for (Review review : product.getReviews())
                 oldRating += review.getRating();
 
-
             short newRating = (short) (((oldRating - existingReview.getRating()) + adjustedRating) / product.getReviews().size());
-
 
             product.setRating(newRating);
         }
-
         return product;
     }
-
 
     public Short updatedRating(Product product, Review review) {
 
@@ -111,7 +105,6 @@ public class ReviewService {
             oldRating+=rev.getRating();
 
         return (short) ((oldRating - review.getRating()) / (product.getReviews().size() - 1));
-
     }
 
     @Transactional

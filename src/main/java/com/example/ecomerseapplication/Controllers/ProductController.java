@@ -1,6 +1,5 @@
 package com.example.ecomerseapplication.Controllers;
 
-
 import com.example.ecomerseapplication.DTOs.*;
 import com.example.ecomerseapplication.Entities.*;
 import com.example.ecomerseapplication.Others.PageContentLimit;
@@ -25,9 +24,6 @@ public class ProductController {
 
     @Autowired
     CategoryAttributeService categoryAttributeService;
-
-    @Autowired
-    CustomerCartService customerCartService;
 
     @Autowired
     CustomerService customerService;

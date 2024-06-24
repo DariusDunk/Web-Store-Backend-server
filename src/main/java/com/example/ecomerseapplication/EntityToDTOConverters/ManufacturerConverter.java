@@ -1,7 +1,6 @@
 package com.example.ecomerseapplication.EntityToDTOConverters;
 
 import com.example.ecomerseapplication.DTOs.ManufacturerDTO;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +21,6 @@ public class ManufacturerConverter {
 
             manufacturerDTOSet.add(manufacturerDTO);
         }
-
 
         return manufacturerDTOSet;
     }

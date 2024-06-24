@@ -8,7 +8,6 @@ import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +24,6 @@ public class ProductDTOMapper {
         compactProductResponse.salePriceStotinki = product.getSalePriceStotinki();
 
         return compactProductResponse;
-
     }
 
     public static Page<CompactProductResponse> productPageToDtoPage(Page<Product> productPage) {
@@ -59,7 +57,6 @@ public class ProductDTOMapper {
         return detailedProductResponse;
     }
 
-
     public static CompactProductPagedListDto pagedListToDtoResponse(List<Product> productList,
                                                                     Pageable pageable) {
         CompactProductPagedListDto productPagedListDto = new CompactProductPagedListDto();
@@ -86,5 +83,4 @@ public class ProductDTOMapper {
 
         return productPagedListDto;
     }
-
 }
