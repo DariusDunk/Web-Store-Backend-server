@@ -4,13 +4,11 @@ package com.example.ecomerseapplication.Controllers;
 import com.example.ecomerseapplication.DTOs.*;
 import com.example.ecomerseapplication.Entities.*;
 import com.example.ecomerseapplication.Others.PageContentLimit;
-import com.example.ecomerseapplication.Services.CategoryAttributeService;
-import com.example.ecomerseapplication.Services.CustomerCartService;
-import com.example.ecomerseapplication.Services.CustomerService;
-import com.example.ecomerseapplication.Services.ProductService;
+import com.example.ecomerseapplication.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +31,9 @@ public class ProductController {
 
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    ReviewService reviewService;
 
     @GetMapping("findall")
     public Page<Product> findAll(@RequestParam int page) {
@@ -141,4 +142,30 @@ public class ProductController {
                 pageRequest);
     }
 
+    @PostMapping("review")
+    public ResponseEntity<String> addReview(@RequestBody ReviewRequest request) {
+
+        if (request.rating > 5 || request.rating < 1)
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Only rating values of 1-5 are allowed");
+
+        short adjustedRating = (short) (request.rating * 10);
+        Customer customer = customerService.findById(request.customerId);
+
+        if (customer == null)
+            return ResponseEntity.notFound().build();
+
+        Product product = productService.findByPCode(request.productCode);
+
+        if (product == null)
+            return ResponseEntity.notFound().build();
+
+        Product updatedProduct = reviewService.manageReview(product, customer, request);
+
+        if (updatedProduct == null)
+            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No change was made!");
+
+        productService.save(updatedProduct);
+
+        return ResponseEntity.ok().body("Review posted");
+    }
 }

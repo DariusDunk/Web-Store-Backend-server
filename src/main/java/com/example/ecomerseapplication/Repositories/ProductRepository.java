@@ -18,12 +18,6 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
 
     @Query(value =
-            "select count(p) " +
-                    "from online_shop.products p " +
-                    "where p.product_name ilike %:name%",nativeQuery = true)
-    Integer getCountByNameLike(@Param("name") String name);
-
-    @Query(value =
             "select p " +
                     "from Product p " +
                     "where p.productName ilike %:name% " +
@@ -53,10 +47,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
     Page<Product> getByManufacturerOrderByRatingDescIdAsc(Manufacturer manufacturer, Pageable pageable);
 
     Page<Product> getByProductCategoryOrderByRatingDesc(ProductCategory productCategory, Pageable pageable);
-
-    List<Product> getByProductCategoryAndSalePriceStotinkiBetweenOrderByRatingDesc(ProductCategory productCategory,
-                                                                 int priceLowest,
-                                                                 int priceHighest);
 
     Optional<Product> getByProductCode(String productCode);
 }

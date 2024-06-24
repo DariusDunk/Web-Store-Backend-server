@@ -32,7 +32,7 @@ public class Customer {
     @Column(name = "registration_date")
     private LocalDate registrationDate;
 
-    @Column(name = "customer_pfp")
+    @Column(name = "customer_pfp", columnDefinition = "character varying(255) default 'default_pfp.jpg'")
     private String customerPfp;
 
     @OneToMany(mappedBy = "customer")

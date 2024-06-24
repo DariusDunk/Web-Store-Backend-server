@@ -104,10 +104,6 @@ public class PurchaseController {
 
         purchaseCartService.saveCarts(purchaseCarts);
 
-//        List<Product> products = new ArrayList<>();
-
-//        List<CompactProductQuantityPair> compactProductQuantityPairs = new ArrayList<>();
-
         PurchaseResponse purchaseResponse = PurchaseMapper.entityToResponse(purchase);
 
         for (CustomerCart customerCart:customerCarts) {
@@ -121,16 +117,6 @@ public class PurchaseController {
 
             purchaseResponse.productQuantityPairs.add(pair);
         }
-
-//        List<CompactProductResponse> productResponses = products.
-//                stream()
-//                .map(ProductDTOMapper::entityToCompactResponse)
-//                .toList();
-
-
-
-
-
 
 
         customerCartService.clearCart(customer);

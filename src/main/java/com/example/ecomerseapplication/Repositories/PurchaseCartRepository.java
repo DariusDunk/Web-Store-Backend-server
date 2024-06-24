@@ -1,7 +1,6 @@
 package com.example.ecomerseapplication.Repositories;
 
 import com.example.ecomerseapplication.CompositeIdClasses.PurchaseCartId;
-import com.example.ecomerseapplication.Entities.Product;
 import com.example.ecomerseapplication.Entities.Purchase;
 import com.example.ecomerseapplication.Entities.PurchaseCart;
 import org.springframework.data.jpa.repository.JpaRepository;

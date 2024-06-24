@@ -28,7 +28,11 @@ public class ProductService {
     @Autowired
     CustomerCartService customerCartService;
 
-      public Page<Product> findAllProductsPage(PageRequest pageRequest) {
+    @Autowired
+    ReviewService reviewService;
+
+
+    public Page<Product> findAllProductsPage(PageRequest pageRequest) {
         return productRepository.findAll(pageRequest);
     }
 
@@ -51,11 +55,15 @@ public class ProductService {
 
         DetailedProductResponse detailedProductResponse = ProductDTOMapper.entityToDetailedResponse(product);
 
-        if (customerCartService.cartExists(customer,product))
+        if (customerCartService.cartExists(customer, product))
             detailedProductResponse.inCart = true;
 
         if (product.getFavouredBy().contains(customer))
             detailedProductResponse.inFavourites = true;
+
+        if (reviewService.exists(product,customer))
+            detailedProductResponse.reviewed = true;
+
 
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(detailedProductResponse);
     }
@@ -81,11 +89,11 @@ public class ProductService {
     }
 
     public CompactProductPagedListDto getByCategoryFiltersManufacturerAndPriceRange(Set<CategoryAttribute> categoryAttributes,
-                                                                                                 ProductCategory productCategory,
-                                                                                                 int priceLowest,
-                                                                                                 int priceHighest,
-                                                                                                 Manufacturer manufacturer,
-                                                                                                 Pageable pageable) {
+                                                                                    ProductCategory productCategory,
+                                                                                    int priceLowest,
+                                                                                    int priceHighest,
+                                                                                    Manufacturer manufacturer,
+                                                                                    Pageable pageable) {
 
         Specification<Product> productSpec = Specification.where(
                 ProductSpecifications.equalsCategory(productCategory)
@@ -122,4 +130,7 @@ public class ProductService {
         return productRepository.getByProductCode(code).orElse(null);
     }
 
+    public void save(Product product) {
+        productRepository.save(product);
+    }
 }

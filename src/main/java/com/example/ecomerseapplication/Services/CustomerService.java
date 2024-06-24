@@ -30,6 +30,8 @@ public class CustomerService {
 
         Customer customer = CustomerMapper.requestToEntity(customerAccountRequest);
 
+        customer.setCustomerPfp("deffault_pfp.jpg");
+
         customerRepository.save(customer);
 
         return HttpStatus.CREATED;
