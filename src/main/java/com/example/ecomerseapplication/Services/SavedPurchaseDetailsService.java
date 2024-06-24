@@ -20,7 +20,7 @@ public class SavedPurchaseDetailsService {
     public ResponseEntity<String> saveDetails(SavedPurchaseDetails purchaseDetails) {
         savedPurchaseDetailsRepo.save(purchaseDetails);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Customer information saved!");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Информацията е запазена!");
     }
 
     public ResponseEntity<SavedPurchaseDetailsDto> getByCustomer(Customer customer) {

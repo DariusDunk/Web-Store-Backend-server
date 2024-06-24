@@ -26,7 +26,4 @@ public class CategoryAttributeService {
         return categoryAttributeRepository.findByNameIdAndOption(nameIds, options);
     }
 
-    public List<CategoryAttribute> getByIds(List<Integer> idList) {
-        return categoryAttributeRepository.findAllById(idList);
-    }
 }

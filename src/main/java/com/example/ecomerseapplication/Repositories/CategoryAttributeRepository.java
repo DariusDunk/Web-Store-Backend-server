@@ -13,11 +13,6 @@ import java.util.Set;
 public interface CategoryAttributeRepository extends JpaRepository<CategoryAttribute, Integer> {
     List<CategoryAttribute> findByProductCategory(ProductCategory productCategory);
 
-    @Query(value = "select ca.attributeName.id " +
-            "from CategoryAttribute ca " +
-            "where ca.productCategory = :category ")
-    List<Integer> findNameIdsByCategory(@Param("category") ProductCategory productCategory);
-
     @Query(value = "select ca " +
             "from CategoryAttribute ca " +
             "where ca.attributeName.id in :nameIds and ca.attributeOption in :options")

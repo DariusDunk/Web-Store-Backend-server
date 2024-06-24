@@ -82,7 +82,7 @@ public class CustomerController {
         Customer customer = customerService.findById(request.customerProductPairRequest.customerId);
 
         if (customer == null)
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Няма такъв потребител");
 
         return customerCartService.addToCart(customer, product, request.quantity);
     }

@@ -6,7 +6,6 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class CustomerMapper {
 
-    private String key;
     public static Customer requestToEntity(CustomerAccountRequest customerAccountRequest) {
 
         Customer customer = new Customer();

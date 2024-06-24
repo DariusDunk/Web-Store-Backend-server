@@ -142,7 +142,7 @@ public class ProductController {
     public ResponseEntity<String> addReview(@RequestBody ReviewRequest request) {
 
         if (request.rating > 5 || request.rating < 1)
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Only rating values of 1-5 are allowed");
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Само стойности от 1-5 са позволени!");
 
         Customer customer = customerService.findById(request.customerId);
 
@@ -157,11 +157,11 @@ public class ProductController {
         Product updatedProduct = reviewService.manageReview(product, customer, request);
 
         if (updatedProduct == null)
-            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No change was made!");
+            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("Не беше извършена промяна");
 
         productService.save(updatedProduct);
 
-        return ResponseEntity.ok().body("Review posted");
+        return ResponseEntity.ok().body("Ревюто е качено!");
     }
 
     @DeleteMapping("deletereview")
@@ -191,6 +191,6 @@ public class ProductController {
         productService.save(product);
         reviewService.delete(review);
 
-        return ResponseEntity.ok().body("Review deleted!");
+        return ResponseEntity.ok().body("Ревюто е изтрито");
     }
 }

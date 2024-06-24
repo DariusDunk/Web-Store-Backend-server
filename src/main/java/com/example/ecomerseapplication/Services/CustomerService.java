@@ -29,7 +29,7 @@ public class CustomerService {
 
         if (incorrectPassword(customerAccountRequest.password.toCharArray()))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Паролата трябва да е поне 8 символа дълга и да има поне един символ от следните: главни букви, малки букви, чифри");
+                    .body("Паролата трябва да е поне 8 символа дълга и да има поне един символ от следните: главни букви, малки букви и цифри!");
 
         Customer customer = CustomerMapper.requestToEntity(customerAccountRequest);
 
@@ -37,7 +37,7 @@ public class CustomerService {
 
         customerRepository.save(customer);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Регистрацията е успешна");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Регистрацията е успешна!");
     }
 
     public ResponseEntity<Long> logIn(CustomerAccountRequest customerAccountRequest) {
@@ -75,7 +75,7 @@ public class CustomerService {
 
         customerRepository.save(customer);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Product successfully removed!");
+        return ResponseEntity.status(HttpStatus.OK).body("Продуктът е успешно премахнат!");
     }
 
     public Customer getByEmail(String email) {
@@ -106,16 +106,16 @@ public class CustomerService {
     public ResponseEntity<String> passwordUpdate(Customer customer, String password) {
 
         if (BCrypt.checkpw(password, String.valueOf(customer.getPassword())))
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("New password cannot be the same as the old password");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Новата парола не може да е същата като старата!");
 
         if (incorrectPassword(password.toCharArray()))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Password needs to be at least 8 symbols long and have at least one of each: capital letters, lowercase letters, digits");
+                    .body("Паролата трябва да е поне 8 символа дълга и да има поне един символ от следните: главни букви, малки букви и цифри!");
 
         customer.setPassword(BCrypt.hashpw(password, BCrypt.gensalt(10)).toCharArray());
 
         customerRepository.save(customer);
 
-        return ResponseEntity.ok().body("Password successfully updated!");
+        return ResponseEntity.ok().body("Паролата бе убновена успешно!");
     }
 }

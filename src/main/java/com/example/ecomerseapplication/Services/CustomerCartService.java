@@ -28,29 +28,24 @@ public class CustomerCartService {
         if (customerCart==null) {
             customerCart = new CustomerCart(cartId, quantity);
             customerCartRepository.save(customerCart);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Product added to cart!");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Продуктът е добавен в количката!");
         }
 
         if (quantity ==0) {
             customerCartRepository.deleteById(cartId);
-            return ResponseEntity.status(HttpStatus.OK).body("Product removed from cart!");
+            return ResponseEntity.status(HttpStatus.OK).body("Продукът е премахнат успешно!");
         }
 
         if (customerCart.getQuantity()!=quantity) {
             customerCartRepository.updateQuantity(quantity, customer.getId(), product.getId());
 
-            return ResponseEntity.status(HttpStatus.CREATED).body("Update successful");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Промяната е успешна");
         }
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     public boolean cartExists(Customer customer, Product product) {
-
         return customerCartRepository.existsByCustomerCartId(new CustomerCartId(product, customer));
-    }
-
-    public List<Product> productsOfCustomerCart(Customer customer) {
-        return customerCartRepository.productsOfCustomer(customer);
     }
 
     public List<CustomerCart> cartsByCustomer(Customer customer) {

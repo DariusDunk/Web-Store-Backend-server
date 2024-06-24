@@ -118,10 +118,8 @@ public class PurchaseController {
             purchaseResponse.productQuantityPairs.add(pair);
         }
 
-
         customerCartService.clearCart(customer);
 
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(purchaseResponse);
-
     }
 }
