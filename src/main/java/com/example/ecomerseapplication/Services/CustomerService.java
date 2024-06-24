@@ -27,7 +27,7 @@ public class CustomerService {
         if (customerExists(customerAccountRequest.email))
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Този имейл вече съществува!");
 
-        if (!passwordValidation(customerAccountRequest.password.toCharArray()))
+        if (incorrectPassword(customerAccountRequest.password.toCharArray()))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Паролата трябва да е поне 8 символа дълга и да има поне един символ от следните: главни букви, малки букви, чифри");
 
@@ -82,25 +82,25 @@ public class CustomerService {
         return customerRepository.getByEmail(email).orElse(null);
     }
 
-    public boolean passwordValidation(char[] password) {
+    public boolean incorrectPassword(char[] password) {
         if (password == null || password.length < 8) {
-            return false;
+            return true;
         }
 
-        boolean hasUppercase = false;
-        boolean hasLowercase = false;
-        boolean hasDigit = false;
+        boolean noUppercase = true;
+        boolean noLowercase = true;
+        boolean noDigit = true;
 
         for (char c : password) {
             if (Character.isUpperCase(c)) {
-                hasUppercase = true;
+                noUppercase = false;
             } else if (Character.isLowerCase(c)) {
-                hasLowercase = true;
+                noLowercase = false;
             } else if (Character.isDigit(c)) {
-                hasDigit = true;
+                noDigit = false;
             }
         }
-        return hasDigit && hasLowercase && hasUppercase;
+        return noDigit || noLowercase || noUppercase;
     }
 
     public ResponseEntity<String> passwordUpdate(Customer customer, String password) {
@@ -108,7 +108,7 @@ public class CustomerService {
         if (BCrypt.checkpw(password, String.valueOf(customer.getPassword())))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("New password cannot be the same as the old password");
 
-        if (!passwordValidation(password.toCharArray()))
+        if (incorrectPassword(password.toCharArray()))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Password needs to be at least 8 symbols long and have at least one of each: capital letters, lowercase letters, digits");
 
