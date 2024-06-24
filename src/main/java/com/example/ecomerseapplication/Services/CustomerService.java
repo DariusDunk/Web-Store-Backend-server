@@ -10,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CustomerService {
-
 
     @Autowired
     CustomerRepository customerRepository;
@@ -24,10 +22,14 @@ public class CustomerService {
         return customerRepository.existsByEmail(email);
     }
 
-    public HttpStatus registration(CustomerAccountRequest customerAccountRequest) {
+    public ResponseEntity<String> registration(CustomerAccountRequest customerAccountRequest) {
 
         if (customerExists(customerAccountRequest.email))
-            return HttpStatus.CONFLICT;
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Този имейл вече съществува!");
+
+        if (!passwordValidation(customerAccountRequest.password.toCharArray()))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Паролата трябва да е поне 8 символа дълга и да има поне един символ от следните: главни букви, малки букви, чифри");
 
         Customer customer = CustomerMapper.requestToEntity(customerAccountRequest);
 
@@ -35,17 +37,13 @@ public class CustomerService {
 
         customerRepository.save(customer);
 
-        return HttpStatus.CREATED;
+        return ResponseEntity.status(HttpStatus.CREATED).body("Регистрацията е успешна");
     }
 
     public ResponseEntity<Long> logIn(CustomerAccountRequest customerAccountRequest) {
 
         if (!customerExists(customerAccountRequest.email))
             return ResponseEntity.notFound().build();
-
-//        if (BCrypt.checkpw(customerAccountRequest.password, customerRepository
-//                .getPassword(customerAccountRequest.email)
-//                .replaceAll(",", "")))
 
         if (BCrypt.checkpw(customerAccountRequest.password, String.valueOf(customerRepository
                 .getPassword(customerAccountRequest.email))))
@@ -57,7 +55,6 @@ public class CustomerService {
     public ResponseEntity<HttpStatus> addProductToFavourites(long customerId, Product product) {
 
         Customer customer = customerRepository.findById(customerId).orElse(null);
-
 
         if (customer == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

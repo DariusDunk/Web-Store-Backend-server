@@ -7,7 +7,6 @@ import com.example.ecomerseapplication.EntityToDTOConverters.CustomerCartRespons
 import com.example.ecomerseapplication.EntityToDTOConverters.ProductDTOMapper;
 import com.example.ecomerseapplication.Others.PageContentLimit;
 import com.example.ecomerseapplication.Services.*;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.util.Pair;
@@ -43,8 +42,7 @@ public class CustomerController {
 
     @PostMapping("registration")
     public ResponseEntity<String> register(@RequestBody CustomerAccountRequest customerAccountRequest) {
-
-        return ResponseEntity.status(customerService.registration(customerAccountRequest)).build();
+        return customerService.registration(customerAccountRequest);
     }
 
     @PostMapping("login")
