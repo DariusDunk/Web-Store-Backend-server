@@ -148,7 +148,6 @@ public class ProductController {
         if (request.rating > 5 || request.rating < 1)
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Only rating values of 1-5 are allowed");
 
-        short adjustedRating = (short) (request.rating * 10);
         Customer customer = customerService.findById(request.customerId);
 
         if (customer == null)
@@ -167,5 +166,35 @@ public class ProductController {
         productService.save(updatedProduct);
 
         return ResponseEntity.ok().body("Review posted");
+    }
+
+    @DeleteMapping("deletereview")
+    public ResponseEntity<String> deleteReview(@RequestBody CustomerProductPairRequest pairRequest) {
+        Customer customer = customerService.findById(pairRequest.customerId);
+
+        if (customer == null)
+            return ResponseEntity.notFound().build();
+
+        Product product = productService.findByPCode(pairRequest.productCode);
+
+        if (product == null)
+            return ResponseEntity.notFound().build();
+
+        Review review = reviewService.getByProdCust(product, customer);
+
+        if (review == null)
+            return ResponseEntity.notFound().build();
+
+        short newRating = reviewService.updatedRating(product, review);
+
+        if (newRating == -1)
+            return ResponseEntity.notFound().build();
+
+        product.setRating(newRating);
+        product.getReviews().remove(review);
+        productService.save(product);
+        reviewService.delete(review);
+
+        return ResponseEntity.ok().body("Review deleted!");
     }
 }

@@ -73,7 +73,7 @@ public class ReviewService {
     public Product updateReview(Review existingReview, ReviewRequest request, Product product) {
         short adjustedRating = (short) (request.rating * 10);
 
-        if (existingReview.getRating() == request.rating
+        if (existingReview.getRating() == adjustedRating
                 && existingReview.getReviewText().equals(request.reviewText))
             return null;
 
@@ -86,9 +86,9 @@ public class ReviewService {
 
         else {
             short oldRating = 0;
-            for (Review review : product.getReviews()) {
+            for (Review review : product.getReviews())
                 oldRating += review.getRating();
-            }
+
 
             short newRating = (short) (((oldRating - existingReview.getRating()) + adjustedRating) / product.getReviews().size());
 
@@ -97,6 +97,26 @@ public class ReviewService {
         }
 
         return product;
+    }
+
+
+    public Short updatedRating(Product product, Review review) {
+
+        if (review == null)
+            return -1;
+
+        short oldRating = 0;
+
+        for (Review rev : product.getReviews())
+            oldRating+=rev.getRating();
+
+        return (short) ((oldRating - review.getRating()) / (product.getReviews().size() - 1));
+
+    }
+
+    @Transactional
+    public void delete(Review review) {
+        reviewRepository.delete(review);
     }
 }
 

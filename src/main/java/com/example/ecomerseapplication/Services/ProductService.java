@@ -122,10 +122,6 @@ public class ProductService {
         return ProductDTOMapper.pagedListToDtoResponse(filteredProductsList, pageable);
     }
 
-    public Product findById(int id) {
-        return productRepository.findById(id).orElse(null);
-    }
-
     public Product findByPCode(String code) {
         return productRepository.getByProductCode(code).orElse(null);
     }

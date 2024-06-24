@@ -22,4 +22,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             "set rating = :rating, reviewText = :text " +
             "where id = :id")
     void updateReview(@Param("id") long id, @Param("rating") short rating, @Param("text") String text);
+
 }
