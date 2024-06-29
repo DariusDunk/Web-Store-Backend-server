@@ -24,11 +24,6 @@ public interface CustomerCartRepository extends JpaRepository<CustomerCart, Cust
 
     boolean existsByCustomerCartId(CustomerCartId customerCartId);
 
-    @Query(value = "select cc.customerCartId.product " +
-            "from CustomerCart cc " +
-            "where cc.customerCartId.customer = ?1")
-    List<Product> productsOfCustomer(Customer customer);
-
     @Query(value = "select cc " +
             "from CustomerCart cc " +
             "where cc.customerCartId.customer = ?1")

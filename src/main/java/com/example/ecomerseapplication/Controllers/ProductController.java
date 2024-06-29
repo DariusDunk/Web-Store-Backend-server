@@ -31,6 +31,12 @@ public class ProductController {
     @Autowired
     ReviewService reviewService;
 
+    @Autowired
+    ProductCategoryService productCategoryService;
+
+    @Autowired
+    ManufacturerService manufacturerService;
+
     @GetMapping("findall")
     public Page<Product> findAll(@RequestParam int page) {
         PageRequest pageRequest = PageRequest.of(page, PageContentLimit.limit);
@@ -68,12 +74,15 @@ public class ProductController {
 
     }
 
-    @GetMapping("manufacturer/{manufacturerName}-{id}/p{page}")
+    @GetMapping("manufacturer/{manufacturerName}/p{page}")
     public ResponseEntity<Page<CompactProductResponse>> productsByManufacturer(@PathVariable String manufacturerName,
-                                                                               @PathVariable int id,
                                                                                @PathVariable int page) {
         PageRequest pageRequest = PageRequest.of(page, PageContentLimit.limit);
-        Manufacturer manufacturer = new Manufacturer(id, manufacturerName);
+        Manufacturer manufacturer = manufacturerService.findByName(manufacturerName);
+
+        if (manufacturer == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         Page<CompactProductResponse> productResponsePage = productService.getByManufacturer(manufacturer, pageRequest);
 
@@ -95,18 +104,19 @@ public class ProductController {
 
     }
 
-    @GetMapping("category/{name}-{id}/p{page}")
+    @GetMapping("category/{name}/p{page}")
     public ResponseEntity<Page<CompactProductResponse>> getProductsByCategory(@PathVariable String name,
-                                                                              @PathVariable int id,
                                                                               @PathVariable int page) {
 
-        if (id == 1 || id == 6)
+        if (name.equals("Бензинови машини") || name.equals("електрически машини"))
             return ResponseEntity.notFound().build();
 
         PageRequest pageRequest = PageRequest.of(page, PageContentLimit.limit);
-        ProductCategory productCategory = new ProductCategory();
-        productCategory.setId(id);
-        productCategory.setCategoryName(name);
+
+        ProductCategory productCategory = productCategoryService.findByName(name);
+        if (productCategory == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         Page<CompactProductResponse> productResponsePage = productService.getByCategory(productCategory, pageRequest);
 

@@ -6,6 +6,7 @@ public class CompactProductResponse {
     public int originalPriceStotinki;
     public int salePriceStotinki;
     public short rating;
+    public int reviewCount;
     public String imageUrl;
 
 }

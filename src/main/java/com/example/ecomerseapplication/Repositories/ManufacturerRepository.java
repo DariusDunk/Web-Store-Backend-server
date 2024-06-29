@@ -5,6 +5,8 @@ import com.example.ecomerseapplication.Entities.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 import java.util.Set;
 
 @Repository
@@ -15,4 +17,7 @@ public interface ManufacturerRepository extends JpaRepository<Manufacturer, Inte
             "join ProductCategory pc ON pc.id = p.productCategory.id " +
             "where p.productCategory = ?1")
     Set<Object[]> getByCategory(ProductCategory productCategory);
+
+
+    Optional<Manufacturer> findByManufacturerName(String name);
 }

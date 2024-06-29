@@ -22,4 +22,7 @@ public class ManufacturerService {
         return manufacturerRepository.getByCategory(productCategory);
     }
 
+    public Manufacturer findByName(String manufacturerName) {
+        return manufacturerRepository.findByManufacturerName(manufacturerName).orElse(null);
+    }
 }

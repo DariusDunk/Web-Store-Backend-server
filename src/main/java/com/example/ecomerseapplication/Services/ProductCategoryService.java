@@ -20,4 +20,8 @@ public class ProductCategoryService {
     public Optional<ProductCategory> findById(int id) {
         return productCategoryRepository.findById(id);
     }
+
+    public ProductCategory findByName(String name) {
+        return productCategoryRepository.findByCategoryName(name).orElse(null);
+    }
 }
