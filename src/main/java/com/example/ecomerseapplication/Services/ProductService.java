@@ -47,8 +47,8 @@ public class ProductService {
     }
 
 
-    public ResponseEntity<DetailedProductResponse> getByNameAndCode(String name, String productCode, Customer customer) {
-        Product product = productRepository.getByNameAndCode(name, productCode);
+    public ResponseEntity<DetailedProductResponse> getByNameAndCode(String productCode, Customer customer) {
+        Product product = productRepository.getByProductCode(productCode).orElse(null);
         if (product == null)
             return ResponseEntity.notFound().build();
 

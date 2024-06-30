@@ -17,6 +17,10 @@ public class ProductCategoryService {
         return productCategoryRepository.findAll();
     }
 
+    public List<String> getAllCategoryNames() {
+        return productCategoryRepository.getAllNames();
+    }
+
     public Optional<ProductCategory> findById(int id) {
         return productCategoryRepository.findById(id);
     }

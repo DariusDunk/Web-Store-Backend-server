@@ -36,6 +36,11 @@ public class CategoryController {
         return categoryService.findAll();
     }
 
+    @GetMapping("names")
+    public List<String> getAllNames() {
+        return categoryService.getAllCategoryNames();
+    }
+
     @GetMapping("filters")
     public CategoryFiltersResponse getAttributes(@RequestParam int id) {
         Optional<ProductCategory> category = categoryService.findById(id);

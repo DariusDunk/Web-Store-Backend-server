@@ -60,18 +60,15 @@ public class ProductController {
         return productService.getNameSuggestions(name);
     }
 
-    @GetMapping("{name}/{productCode}")
-    public ResponseEntity<DetailedProductResponse> detailedProductInfo(@PathVariable String name,
-                                                                       @PathVariable String productCode,
+    @GetMapping("{productCode}")
+    public ResponseEntity<DetailedProductResponse> detailedProductInfo(@PathVariable String productCode,
                                                                        @RequestParam long id) {
 
         Customer customer = customerService.findById(id);
-        ResponseEntity<DetailedProductResponse> detailedProductResponse = productService.getByNameAndCode(name,
-                productCode, customer);
-
+        ResponseEntity<DetailedProductResponse> detailedProductResponse = productService
+                .getByNameAndCode(productCode, customer);
 
         return Objects.requireNonNullElseGet(detailedProductResponse, () -> ResponseEntity.notFound().build());
-
     }
 
     @GetMapping("manufacturer/{manufacturerName}/p{page}")
