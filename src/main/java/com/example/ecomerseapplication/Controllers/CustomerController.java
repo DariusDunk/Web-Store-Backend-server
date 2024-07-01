@@ -18,7 +18,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("customer")
+@RequestMapping("customer/")
 public class CustomerController {
 
     @Autowired
@@ -47,7 +47,7 @@ public class CustomerController {
     }
 
     @PostMapping("addfavourite")
-    public ResponseEntity<HttpStatus> addProductToFavourites(@RequestBody CustomerProductPairRequest pairRequest) {
+    public ResponseEntity<String> addProductToFavourites(@RequestBody CustomerProductPairRequest pairRequest) {
         Product product = productService.findByPCode(pairRequest.productCode);
 
         if (product == null)
@@ -84,7 +84,7 @@ public class CustomerController {
         if (customer == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Няма такъв потребител");
 
-        return customerCartService.addToCart(customer, product, request.quantity);
+        return customerCartService.addToOrRemoveFromCart(customer, product, request.quantity);
     }
 
     @DeleteMapping("removefav")

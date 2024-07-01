@@ -52,7 +52,7 @@ public class CustomerService {
         return ResponseEntity.notFound().build();
     }
 
-    public ResponseEntity<HttpStatus> addProductToFavourites(long customerId, Product product) {
+    public ResponseEntity<String > addProductToFavourites(long customerId, Product product) {
 
         Customer customer = customerRepository.findById(customerId).orElse(null);
 
@@ -61,7 +61,7 @@ public class CustomerService {
 
         customer.getFavourites().add(product);
         customerRepository.save(customer);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body("Продуктът е добавен в любими!");
     }
 
     public Customer findById(long id) {

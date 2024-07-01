@@ -19,7 +19,7 @@ public class CustomerCartService {
     CustomerCartRepository customerCartRepository;
 
     @Transactional
-    public ResponseEntity<String> addToCart(Customer customer, Product product, short quantity) {
+    public ResponseEntity<String> addToOrRemoveFromCart(Customer customer, Product product, short quantity) {
 
         CustomerCartId cartId = new CustomerCartId(product, customer);
 
