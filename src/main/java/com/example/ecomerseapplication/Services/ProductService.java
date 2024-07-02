@@ -31,8 +31,8 @@ public class ProductService {
     ReviewService reviewService;
 
 
-    public Page<Product> findAllProductsPage(PageRequest pageRequest) {
-        return productRepository.findAll(pageRequest);
+    public Page<CompactProductResponse> findAllProductsPage(PageRequest pageRequest) {
+        return ProductDTOMapper.productPageToDtoPage(productRepository.findAllSortByRating(pageRequest));
     }
 
     public Page<CompactProductResponse> getProductsLikeName(PageRequest pageRequest, String name) {

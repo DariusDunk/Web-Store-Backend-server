@@ -38,7 +38,7 @@ public class ProductController {
     ManufacturerService manufacturerService;
 
     @GetMapping("findall")
-    public Page<Product> findAll(@RequestParam int page) {
+    public Page<CompactProductResponse> findAll(@RequestParam int page) {
         PageRequest pageRequest = PageRequest.of(page, PageContentLimit.limit);
         return productService.findAllProductsPage(pageRequest);
     }

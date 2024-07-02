@@ -22,6 +22,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
                     "order by p.rating, p.id ")
     Page<Product> getByNameLike(@Param("name") String name, Pageable pageable);
 
+    @Query(value = "select p " +
+            "from Product p " +
+            "order by p.rating desc ")
+    Page<Product> findAllSortByRating(Pageable pageable);
     @Query(value =
             "select p.productName " +
             "from Product p " +

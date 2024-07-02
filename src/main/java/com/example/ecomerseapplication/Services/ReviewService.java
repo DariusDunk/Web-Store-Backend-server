@@ -55,7 +55,7 @@ public class ReviewService {
         review.setRating(adjustedRating);
 
         if (product.getReviews().isEmpty())
-            product.setRating(request.rating);
+            product.setRating(adjustedRating);
 
         else {
             short rating = (short) (((product.getRating() * product.getReviews().size()) + adjustedRating) / (product.getReviews().size() + 1));
