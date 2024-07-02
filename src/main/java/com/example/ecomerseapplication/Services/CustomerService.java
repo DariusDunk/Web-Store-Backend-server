@@ -43,13 +43,13 @@ public class CustomerService {
     public ResponseEntity<Long> logIn(CustomerAccountRequest customerAccountRequest) {
 
         if (!customerExists(customerAccountRequest.email))
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
         if (BCrypt.checkpw(customerAccountRequest.password, String.valueOf(customerRepository
                 .getPassword(customerAccountRequest.email))))
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(customerRepository.getIdByEmail(customerAccountRequest.email));
 
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     public ResponseEntity<String > addProductToFavourites(long customerId, Product product) {
