@@ -7,7 +7,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 
 @Embeddable
@@ -19,7 +18,6 @@ public class CustomerCartId implements Serializable {
     @ManyToOne
     private Product product;
 
-
     @JoinColumn(name = "customer_id")
     @ManyToOne
     private Customer customer;
@@ -28,5 +26,4 @@ public class CustomerCartId implements Serializable {
         this.product = product;
         this.customer = customer;
     }
-
 }

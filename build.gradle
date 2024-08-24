@@ -34,6 +34,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation group: 'org.springframework', name: 'spring-web', version: '6.1.5'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '3.2.4'
+    implementation 'org.postgresql:postgresql:42.7.3'
+
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'

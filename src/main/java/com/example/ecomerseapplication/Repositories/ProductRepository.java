@@ -34,12 +34,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
             "limit 7 ")
     List<String> getNameSuggestions(String name);
 
-    @Query(value =
-            "select p " +
-            "from Product p " +
-            "WHERE p.productName = ?1 AND p.productCode = ?2 ")
-    Product getByNameAndCode(String name, String code);
-
         @Query(value = "select p " +
             "from Product p " +
             "order by p.rating desc " +

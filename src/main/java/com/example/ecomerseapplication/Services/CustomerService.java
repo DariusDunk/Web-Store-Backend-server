@@ -1,6 +1,7 @@
 package com.example.ecomerseapplication.Services;
 
 import com.example.ecomerseapplication.DTOs.CustomerAccountRequest;
+import com.example.ecomerseapplication.DTOs.CustomerResponse;
 import com.example.ecomerseapplication.Entities.Customer;
 import com.example.ecomerseapplication.Entities.Product;
 import com.example.ecomerseapplication.EntityToDTOConverters.CustomerMapper;
@@ -40,14 +41,22 @@ public class CustomerService {
         return ResponseEntity.status(HttpStatus.CREATED).body("Регистрацията е успешна!");
     }
 
-    public ResponseEntity<Long> logIn(CustomerAccountRequest customerAccountRequest) {
+    public ResponseEntity<CustomerResponse> logIn(CustomerAccountRequest customerAccountRequest) {
 
         if (!customerExists(customerAccountRequest.email))
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
         if (BCrypt.checkpw(customerAccountRequest.password, String.valueOf(customerRepository
-                .getPassword(customerAccountRequest.email))))
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(customerRepository.getIdByEmail(customerAccountRequest.email));
+                .getPassword(customerAccountRequest.email)))) {
+            Customer customer = customerRepository.getCustomerByEmail(customerAccountRequest.email).orElse(null);
+            if (customer == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+            CustomerResponse customerResponse = new CustomerResponse();
+            customerResponse.customerName = customer.getName();
+            customerResponse.customerId = customer.getId();
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(customerResponse);
+        }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }

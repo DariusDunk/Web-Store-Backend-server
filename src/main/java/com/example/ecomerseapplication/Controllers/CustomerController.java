@@ -42,7 +42,7 @@ public class CustomerController {
     }
 
     @PostMapping("login")
-    public ResponseEntity<Long> logIn(@RequestBody CustomerAccountRequest customerAccountRequest) {
+    public ResponseEntity<CustomerResponse> logIn(@RequestBody CustomerAccountRequest customerAccountRequest) {
         return customerService.logIn(customerAccountRequest);
     }
 

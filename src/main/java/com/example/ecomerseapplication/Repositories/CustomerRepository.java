@@ -15,10 +15,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
             "where c.email = ?1")
     char[] getPassword(String email);
 
-    @Query(value = "select c.id " +
-            "from Customer c " +
-            "where c.email = ?1")
-    Long getIdByEmail(String email);
+//    @Query(value = "select c.id " +
+//            "from Customer c " +
+//            "where c.email = ?1")
+    Optional<Customer> getCustomerByEmail(String email);
 
     Optional<Customer> getByEmail(String email);
 }

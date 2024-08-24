@@ -5,6 +5,4 @@ public class PageInformationDto {
     public int number;
     public int totalElements;
     public int totalPages;
-
-
 }
