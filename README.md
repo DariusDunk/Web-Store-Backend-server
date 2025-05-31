@@ -20,6 +20,10 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 
 ---
 
+# Features
+
+---
+
 1. First item
 2. Second item
    1. Subitem 2.1
