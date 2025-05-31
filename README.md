@@ -63,21 +63,15 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 # Requirements
 
 - Java JDK 17
+- Gradle for dependency management
+- PostgreSQL: version 17 or higher
 
 ---
 
-1. First item
-2. Second item
-   1. Subitem 2.1
-   2. Subitem 2.2
 
 
-- Item 1
-- Item 2
-  - Subitem 2.1
-  - Subitem 2.2
+# Disclamer
 
-> This is a blockquote.
-> It can span multiple lines.
+This project was developed for educational purposes as part of my graduation project at the Technical University of Varna.
 
----
+
