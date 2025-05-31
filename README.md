@@ -18,7 +18,7 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 
 [features]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#features
 [TechStacks]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#technologies-used
-[Test]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#technologies-used
+[Test]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#tests
 
 
 
