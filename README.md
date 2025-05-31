@@ -30,6 +30,7 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 - Spring boot and Java based interface
 - User accounts and authentication
 - CRUD operations for products and clients
+- Password hashing
 - Methods for searching products:
   - By full name
   - By suggestions
@@ -42,15 +43,26 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 
 # Technologies used
 
-- Main Language: Java
-- Database: PostgreSQL
-- Framework: SpringBoot
-- Password hashing library: BCrypt
+- Main Language: `Java`
+- Framework: `SpringBoot`
+- Password hashing library: `BCrypt`
+- Database: `PostgreSQL`
+- ORM: `Hibernate` (`JPA`)
+- Testing: `JUnit`
   
 ---
 
 # Tests
 
+- Password hashing
+- User login
+- User cart check
+
+---
+
+# Requirements
+
+- Java JDK 17
 
 ---
 
