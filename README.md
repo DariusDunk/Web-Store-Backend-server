@@ -38,6 +38,18 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 
 # Technologies used
 
+- Main Language: Java
+- Database: PostgreSQL
+- Framework: SpringBoot
+- Password hashing library: BCrypt
+  
+---
+
+# Tests
+
+
+---
+
 1. First item
 2. Second item
    1. Subitem 2.1
