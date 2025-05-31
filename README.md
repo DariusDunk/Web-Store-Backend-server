@@ -33,7 +33,7 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 ---
 
 
-# Thechnologies used
+# Technologies used
 
 1. First item
 2. Second item
