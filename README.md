@@ -10,19 +10,30 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 
 # Table of Contents
 
-1. First item
-2. Second item
+1. [Features][id]
 
-[Link Text][id]
-
-[id]: https://github.com
+[id]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#features
 
 
 ---
 
 # Features
 
+- A relational database for storing user and store data
+- Spring boot and Java based interface
+- User accounts and authentication
+- CRUD operations for products and clients
+- Methods for searching products:
+  - By full name
+  - By suggestions
+  - By manufacturer
+  - By product attributes
+- Managing a shopping cart and favourites list
+  
 ---
+
+
+# Thechnologies used
 
 1. First item
 2. Second item
