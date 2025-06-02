@@ -1,14 +1,14 @@
-## Garden Webstore - backend
+# Garden Webstore - backend
 This project serves as a backend server application for a webstore, managing client requests and database calls
 
 ---
 
-# Purpose
+## Purpose
 As demand grows and suppliers struggle to keep pace, the limitations of physical stores become increasingly evident. This project addresses these challenges by introducing an online ordering system that allows customers to conveniently shop from the comfort of their homes, enhancing accessibility.
 
 ---
 
-# Table of Contents
+## Table of Contents
 
 1. [Features][features]
 2. [Technologies used][TechStacks]
@@ -29,7 +29,7 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 
 ---
 
-# Features
+## Features
 
 - A relational database for storing user and store data
 - Spring boot and Java based interface
@@ -46,7 +46,7 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 ---
 
 
-# Technologies used
+## Technologies used
 
 - Main Language: `Java`
 - Framework: `SpringBoot`
@@ -57,7 +57,7 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
   
 ---
 
-# Tests
+## Tests
 
 - Password hashing
 - User login
@@ -65,7 +65,7 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 
 ---
 
-# Requirements
+## Requirements
 
 - Java JDK 17
 - Gradle: For dependency management
@@ -73,7 +73,7 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 
 ---
 
-# API Overview
+## API Overview
 
 ---
 
@@ -92,19 +92,19 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 
 ---
 
-# Setup and instalation
+## Setup and instalation
 
     git clone https://github.com/DariusDunk/Web-Store-Backend-server.git
 
 ---
 
-# Contributors
+## Contributors
 
 - **Radosvet Minev**: Software Engineering student at Technical University of Varna.
 
 ---
 
-# Disclamer
+## Disclamer
 
 This project was developed for educational purposes as part of my graduation project at the Technical University of Varna.
 
