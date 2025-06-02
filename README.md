@@ -88,7 +88,11 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 |`GET`| `product/suggest`| Suggests products based on the string inside the search field|
 |`GET`| `product/{productCode}`| Shows detailed information about a product|
 
+---
 
+# Contributors
+
+- **Radosvet Minev**: Software Engineering student at Technical University of Varna.
 
 ---
 
