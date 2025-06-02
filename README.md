@@ -1,4 +1,4 @@
-# Webstore backend
+# Garden Webstore - backend
 This project serves as a backend server application for a webstore, managing client requests and database calls
 
 ---
