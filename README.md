@@ -96,16 +96,6 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 
     git clone https://github.com/DariusDunk/Web-Store-Backend-server.git
 
----
 
-## Contributors
-
-- **Radosvet Minev**: Software Engineering student at Technical University of Varna.
-
----
-
-## Disclamer
-
-This project was developed for educational purposes as part of my graduation project at the Technical University of Varna.
 
 
