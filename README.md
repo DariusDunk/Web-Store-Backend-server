@@ -95,5 +95,5 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 ## Setup and instalation
 
 ```
-    git clone https://github.com/DariusDunk/Web-Store-Backend-server.git
+git clone https://github.com/DariusDunk/Web-Store-Backend-server.git
 ```
