@@ -73,6 +73,22 @@ API Overview
 
 ---
 
+| Method | Endpoint | Description | 
+|--------|----------|-------------|
+|`POST`  | `customer/registration`| Register user|
+|`POST`| `customer/login`| Login for the user|
+|`POST`| `customer/addfavourite`| Add a product to favourites|
+|`GET`|`customer/favourites/p/{page}`| Open a page from the favourites list|
+|`DELETE`|`customer/removefav`| Remove a product from favourites|
+|`POST`|`customer/addtocart`| Adds or removes a product from the user cart|
+|`GET`| `customer/cart`| Displays a customer's shopping cart|
+|`GET`| `product/search`| Searches products by name|
+|`GET`| `product/suggest`| Suggests products based on the string inside the search field|
+|`GET`| `product/{productCode}`| Shows detailed information about a product|
+
+
+
+---
 
 # Disclamer
 
