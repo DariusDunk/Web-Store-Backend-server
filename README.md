@@ -68,8 +68,8 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 # Requirements
 
 - Java JDK 17
-- Gradle for dependency management
-- PostgreSQL: version 17 or higher
+- Gradle: For dependency management
+- PostgreSQL: Version 17 or higher
 
 ---
 
