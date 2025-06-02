@@ -15,6 +15,7 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 3. [Tests][Test]
 4. [Requirements][Requirement]
 5. [API overview][endpoints]
+6. [Contributors][contributors]
 
 
 
@@ -23,6 +24,7 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 [Test]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#tests
 [Requirement]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#requirements
 [endpoints]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#api-overview
+[contributors]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#contributors
 
 
 ---
