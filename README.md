@@ -1,4 +1,4 @@
-# A Java server program for managing a webstore
+# Webstore backend
 This project serves as a backend server application for a webstore, managing client requests and database calls
 
 ---
@@ -69,6 +69,9 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 
 ---
 
+API Overview
+
+---
 
 
 # Disclamer
