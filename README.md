@@ -14,6 +14,7 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 2. [Technologies used][TechStacks]
 3. [Tests][Test]
 4. [Requirements][Requirement]
+5. [API overview][endpoints]
 
 
 
@@ -21,6 +22,7 @@ As demand grows and suppliers struggle to keep pace, the limitations of physical
 [TechStacks]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#technologies-used
 [Test]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#tests
 [Requirement]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#requirements
+[endpoints]: https://github.com/DariusDunk/Web-Store-Backend-server/blob/master/README.md#api-overview
 
 
 ---
